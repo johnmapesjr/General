@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 from BPNN import *
-from random import choice, randint
+from random import choice
 
-#CREATE 100 EXAMPLES
+#CREATE 100 TRAINING EXAMPLES & 100 TESTING EXAMPLES
 train=[]
 test=[]
 
@@ -28,7 +28,8 @@ nn = Neural_Net( alpha = 0.10, ip = 2, h = 10, op = 1)
 nn.initialize_weights( )
 nn.backward_connect_nodes( )
 
-for i in range( 1000 ) :
+Epochs = 1000
+for i in range( Epochs ) :
 	for example in [choice( train) for x in range( len( train ) )]:
 		nn.assign_input( example.ip) 
 		nn.calculate( )
@@ -44,6 +45,7 @@ for example in test:
 			correct += 1	
 			print('correct')
 		else:
+			print('whoops...')
 			print(actual, 'Actual')
 			print(hypothesis, 'Hypothesis \n\n')
 print('%2f%% correct. ' % (correct / len(test) * 100), correct, ' correct out of ', len(test))
