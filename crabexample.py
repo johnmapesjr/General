@@ -19,7 +19,8 @@ with open('crabs.csv') as f:
 
 with open('crabs.csv') as f:
 	header = f.readline()
-	for i in range(100):
+	for i in range(200):
+		if i < 100: continue
 		line = f.readline()
 		op = [line.split(',')[2]]
 		if op[0] == '"M"': op[0] = 0
