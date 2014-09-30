@@ -3,13 +3,13 @@
 from math import e, tanh
 from random import random
 
-#def g( x ): 
-#	if x > 10: return 1
-#	if x < -10: return 0
-#	else: return 1.0 / ( 1.0 + e ** -x )
-#def g_d( x ): return e ** -x / ( 1.0 + e ** -x ) ** 2
-def g( x ): return tanh(x)
-def g_d( x ): return 1 - tanh(x) * tanh(x)
+def g( x ): 
+	if x > 10: return 1
+	if x < -10: return 0
+	else: return 1.0 / ( 1.0 + e ** -x )
+def g_d( x ): return e ** -x / ( 1.0 + e ** -x ) ** 2
+#def g( x ): return tanh(x)
+#def g_d( x ): return 1 - tanh(x) * tanh(x)
 
 class Node( ):
 	def __init__( self ):
