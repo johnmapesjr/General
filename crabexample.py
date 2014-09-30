@@ -24,10 +24,12 @@ with open('crabs.csv') as f:
 		ip = [float(line.split(',')[-4]), float(line.split(',')[-2])]
 		test.append( Example( ip, op ))
 
+#CREATE NEURAL NETWORK
 nn = Neural_Net( alpha = 0.10, ip = 2, h = 10, op = 1)
 nn.initialize_weights( )
 nn.backward_connect_nodes( )
 
+#TRAIN NEURAL NETWORK
 Epochs = 1000
 for i in range( Epochs ) :
 	for example in [choice( train) for x in range( len( train ) )]:
@@ -35,6 +37,7 @@ for i in range( Epochs ) :
 		nn.calculate( )
 		nn.train( example)
 
+#TEST NEURAL NETWORK
 correct = 0
 for example in test:
 		nn.assign_input( example.ip) 
@@ -49,4 +52,3 @@ for example in test:
 			print(actual, 'Actual')
 			print(hypothesis, 'Hypothesis \n\n')
 print('%2f%% correct. ' % (correct / len(test) * 100), correct, ' correct out of ', len(test))
-		
