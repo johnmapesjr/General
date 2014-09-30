@@ -12,10 +12,20 @@ with open('crabs.csv') as f:
 	for i in range(100):
 		line = f.readline()
 		ip = [line.split(',')[2]]
+		if ip[0] == '"M"': ip[0] = 0
+		if ip[0] == '"F"': ip[0] = 1
 		op = [float(line.split(',')[-4]), float(line.split(',')[-2])]
-		print(ip, op)
-		exit()
 		train.append( Example( ip, op ))
+
+with open('crabs.csv') as f:
+	header = f.readline()
+	for i in range(100):
+		line = f.readline()
+		ip = [line.split(',')[2]]
+		if ip[0] == '"M"': ip[0] = 0
+		if ip[0] == '"F"': ip[0] = 1
+		op = [float(line.split(',')[-4]), float(line.split(',')[-2])]
+		test.append( Example( ip, op ))
 
 nn = Neural_Net( alpha = 0.1, ip = 12, h = 20, op = 12)
 nn.initialize_weights( )
