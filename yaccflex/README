@@ -1,0 +1,19 @@
+
+yacc -d calc.y
+lex calc.l
+gcc -c graph.c interpreter.c
+gcc lex.yy.c y.tab.c graph.o -ocalcgraph
+gcc lex.yy.c y.tab.c interpreter.o -ocalcinterpreter
+
+echo 'x = 0;
+while (x < 3) {
+print x;
+x = x + 1;
+} '|./calcgraph
+
+echo 'x = 0;
+while (x < 3) {
+print x;
+x = x + 1;
+} '|./calcinterpreter 
+
