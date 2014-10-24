@@ -95,7 +95,7 @@ class Neural_Net( ):
 	def train( self, example, batch=False ):
 		#print( "Training..." )
 		for ( index, node ) in enumerate( self.opl.nodes ):
-			self.error = example.op[ index ] - node.value + sum([connection.weight for connection in node.i_connections]) * self.Lambda_opl / len(self.opl.nodes)
+			self.error = example.op[ index ] - node.value + sum([abs(connection.weight) for connection in node.i_connections]) * self.Lambda_opl / len(self.opl.nodes)
 			self.avgerrorqueue.append(self.error)
 			self.avgerror = sum(self.avgerrorqueue) / self.avgerrorqueuelen
 			del self.avgerrorqueue[0]
@@ -106,7 +106,7 @@ class Neural_Net( ):
 			output_summation = 0.0
 			for connection in node.o_connections:
 				output_summation += connection.weight * connection.o_node.delta
-			node.delta = g_d( node.summation ) * output_summation + sum([connection.weight for connection in node.i_connections]) * self.Lambda_hil / len(self.hil.nodes)
+			node.delta = g_d( node.summation ) * output_summation + sum([abs(connection.weight) for connection in node.i_connections]) * self.Lambda_hil / len(self.hil.nodes)
 			for connection in node.i_connections:
 				connection.weight = connection.weight + self.alpha * connection.i_node.value * node.delta
 	def display_net( self, verbose = False):
